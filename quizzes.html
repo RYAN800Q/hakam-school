@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الواجبات - بوابة الطالب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* تنسيق خاص لقائمة الواجبات */
+        .quiz-summary-card {
+            background-color: var(--primary-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-right: 5px solid #2980b9; /* لون مميز للواجبات */
+            transition: transform 0.3s;
+        }
+        .quiz-summary-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        .quiz-title-section h3 {
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+            font-size: 20px;
+        }
+        .quiz-title-section p {
+            font-size: 14px;
+            color: #777;
+            margin: 2px 0;
+        }
+        .start-quiz-btn {
+            background-color: #2980b9; 
+            color: var(--primary-white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .start-quiz-btn:hover {
+            background-color: #1c689c;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-top-header">
+            <i class="fas fa-grip-lines-vertical"></i>
+            البوابة الرئيسية
+        </div>
+        
+        <a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a>
+        <a href="classes.html"><i class="fas fa-calendar-alt"></i> جدول الحصص</a>
+        <a href="quizzes.html"><i class="fas fa-pencil-alt"></i> الواجبات</a> 
+        <a href="results.html"><i class="fas fa-chart-line"></i> النتائج</a> 
+        <a href="exams.html"><i class="fas fa-brain"></i> الاختبارات</a> 
+        
+        <hr style="margin: 10px 15px; border-color: #555;">
+        <a href="notes.html"><i class="far fa-comments"></i> الملاحظات</a> 
+    </div>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="school_logo.jpg" alt="شعار المدرسة" class="school-logo"> 
+            الـحـكـم بـن عـمـرو 
+        </div>
+        
+        <div class="user-actions">
+            <div class="notification-container">
+                <i class="fas fa-bell" id="notification-bell"></i> 
+                <div id="notification-dropdown" class="notification-dropdown">
+                    <h4>التنبيهات الجديدة</h4>
+                    <p><i class="fas fa-clipboard-list" style="color: var(--primary-dark);"></i> يوجد واجبات يجب حلها</p>
+                    <p><i class="fas fa-calendar-check" style="color: var(--success-color);"></i> تم إدراج الحصص لهذا الأسبوع</p>
+                </div>
+            </div>
+            <img src="profile.jpg" alt="صورة المستخدم" class="profile-pic">
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        
+        <a href="index.html" class="back-to-home-btn">
+            <i class="fas fa-arrow-right"></i>
+            الرجوع إلى الصفحة الرئيسية
+        </a>
+
+        <h2 class="section-title-page">📝 قائمة الواجبات المتاحة</h2>
+
+        <div class="quiz-summary-card">
+            <div class="quiz-title-section">
+                <h3>واجب الفصل الأول: الروابط الكيميائية</h3>
+                <p>المادة: **كيمياء 2** | الدرجة: **10 درجات** | الموعد النهائي: **15/12/2025**</p>
+            </div>
+            <a href="quiz-start.html?id=1" class="start-quiz-btn">ابدأ الواجب</a>
+        </div>
+        
+        <div class="quiz-summary-card">
+            <div class="quiz-title-section">
+                <h3>واجب الفصل الثاني: الحركة والقوى</h3>
+                <p>المادة: **فيزياء 2** | الدرجة: **15 درجة** | الموعد النهائي: **22/12/2025**</p>
+            </div>
+            <a href="quiz-start.html?id=2" class="start-quiz-btn">ابدأ الواجب</a>
+        </div>
+        
+    </main>
+
+    <footer class="main-footer">
+        <p>تم صنع الموقع من قبل ريان محمد البارقي و سلطان سعيد ال حشاش</p>
+        <p>جميع الحقوق محفوظة لدى الحكم بن عمرو</p>
+    </footer>
+
+    <script>
+        function openNav() {if (window.innerWidth <= 900) {document.getElementById("mySidebar").style.width = "250px";}}
+        function closeNav() {if (window.innerWidth <= 900) {document.getElementById("mySidebar").style.width = "0";}}
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const bellIcon = document.getElementById('notification-bell');
+            const dropdown = document.getElementById('notification-dropdown');
+
+            if (bellIcon) {
+                bellIcon.addEventListener('click', () => {
+                    bellIcon.classList.add('bell-shake');
+                    setTimeout(() => {bellIcon.classList.remove('bell-shake');}, 500); 
+                    dropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!bellIcon.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج الطالب - بوابة الطالب</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .results-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--primary-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .results-table th, .results-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .results-table th {
+            background-color: var(--primary-dark);
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .results-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .results-table td {
+            color: var(--text-color);
+            font-size: 15px;
+        }
+        /* لتلوين درجة النجاح والرسوب */
+        .grade-pass {
+            font-weight: bold;
+            color: var(--success-color); /* أخضر */
+        }
+        .grade-fail {
+            font-weight: bold;
+            color: var(--error-color); /* أحمر */
+        }
+        .avg-summary {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .avg-summary span {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-top-header"> <i class="fas fa-grip-lines-vertical"></i> البوابة الرئيسية </div>
+        <a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a>
+        <a href="classes.html"><i class="fas fa-calendar-alt"></i> جدول الحصص</a>
+        <a href="quizzes.html"><i class="fas fa-pencil-alt"></i> الواجبات</a> 
+        <a href="results.html"><i class="fas fa-chart-line"></i> النتائج</a> 
+        <a href="exams.html"><i class="fas fa-brain"></i> الاختبارات</a> 
+        <hr style="margin: 10px 15px; border-color: #555;">
+        <a href="notes.html"><i class="far fa-comments"></i> الملاحظات</a> 
+    </div>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="school_logo.jpg" alt="شعار المدرسة" class="school-logo"> 
+            الـحـكـم بـن عـمـرو 
+        </div>
+        <div class="user-actions">
+            <div class="notification-container"> <i class="fas fa-bell" id="notification-bell"></i> <div id="notification-dropdown" class="notification-dropdown"> <h4>التنبيهات الجديدة</h4> <p><i class="fas fa-clipboard-list" style="color: var(--primary-dark);"></i> يوجد واجبات يجب حلها</p> <p><i class="fas fa-calendar-check" style="color: var(--success-color);"></i> تم إدراج الحصص لهذا الأسبوع</p> </div> </div>
+            <img src="profile.jpg" alt="صورة المستخدم" class="profile-pic">
+        </div>
+    </header>
+    
+    <main class="dashboard-content">
+        
+        <a href="index.html" class="back-to-home-btn">
+            <i class="fas fa-arrow-right"></i>
+            الرجوع إلى الصفحة الرئيسية
+        </a>
+
+        <h2 class="section-title-page">📈 نتائج الطالب الأكاديمية</h2>
+        
+        <div class="results-container">
+            
+            <div class="avg-summary">
+                المعدل التراكمي للفصل الدراسي الحالي: <span>92.5%</span> (ممتاز)
+            </div>
+
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>المادة</th>
+                        <th>نوع التقييم</th>
+                        <th>الدرجة الكلية</th>
+                        <th>الدرجة المحققة</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>فيزياء 2</td>
+                        <td>اختبار فصلي</td>
+                        <td>50</td>
+                        <td>48</td>
+                        <td class="grade-pass">ناجح</td>
+                    </tr>
+                    <tr>
+                        <td>كيمياء 2</td>
+                        <td>واجب 1</td>
+                        <td>10</td>
+                        <td>9</td>
+                        <td class="grade-pass">ناجح</td>
+                    </tr>
+                    <tr>
+                        <td>رياضيات 2</td>
+                        <td>اختبار نصفي</td>
+                        <td>30</td>
+                        <td>22</td>
+                        <td class="grade-pass">ناجح</td>
+                    </tr>
+                     <tr>
+                        <td>أحياء 2</td>
+                        <td>اختبار شهري</td>
+                        <td>20</td>
+                        <td>12</td>
+                        <td class="grade-fail">راسب</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </main>
+
+    <footer class="main-footer">
+        <p>تم صنع الموقع من قبل ريان محمد البارقي و سلطان سعيد ال حشاش</p>
+        <p>جميع الحقوق محفوظة لدى الحكم بن عمرو</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bellIcon = document.getElementById('notification-bell');
+            const dropdown = document.getElementById('notification-dropdown');
+
+            if (bellIcon) {
+                bellIcon.addEventListener('click', () => {
+                    bellIcon.classList.add('bell-shake');
+                    setTimeout(() => {bellIcon.classList.remove('bell-shake');}, 500); 
+                    dropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!bellIcon.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

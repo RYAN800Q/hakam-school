@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حل الواجب - الروابط الكيميائية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* تنسيق خاص لصفحة الأسئلة */
+        .quiz-page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question-card {
+            background-color: var(--primary-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            padding: 30px;
+            border-left: 5px solid var(--primary-dark);
+        }
+        .question-card p.question-text {
+            font-size: 18px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .option-label {
+            display: block;
+            background-color: #f7f7f7;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            font-size: 16px;
+        }
+        .option-label:hover {
+            background-color: #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .option-label input[type="radio"] {
+            margin-left: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        .finish-quiz-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 40px;
+        }
+        .finish-quiz-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        /* رسالة الإنهاء (Overlay) */
+        #finish-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none; /* مخفي بشكل افتراضي */
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .finish-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.9);}
+            to {opacity: 1; transform: scale(1);}
+        }
+        .finish-content h2 {
+            color: var(--success-color);
+            margin: 15px 0 10px;
+        }
+        .finish-content p {
+            color: #555;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-top-header"> <i class="fas fa-grip-lines-vertical"></i> البوابة الرئيسية </div>
+        <a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a>
+        <a href="classes.html"><i class="fas fa-calendar-alt"></i> جدول الحصص</a>
+        <a href="quizzes.html"><i class="fas fa-pencil-alt"></i> الواجبات</a> 
+        <a href="results.html"><i class="fas fa-chart-line"></i> النتائج</a> 
+        <a href="exams.html"><i class="fas fa-brain"></i> الاختبارات</a> 
+        <hr style="margin: 10px 15px; border-color: #555;">
+        <a href="notes.html"><i class="far fa-comments"></i> الملاحظات</a> 
+    </div>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="school_logo.jpg" alt="شعار المدرسة" class="school-logo"> 
+            الـحـكـم بـن عـمـرو 
+        </div>
+        <div class="user-actions">
+            <div class="notification-container"> <i class="fas fa-bell" id="notification-bell"></i> <div id="notification-dropdown" class="notification-dropdown"> <h4>التنبيهات الجديدة</h4> <p><i class="fas fa-clipboard-list" style="color: var(--primary-dark);"></i> يوجد واجبات يجب حلها</p> <p><i class="fas fa-calendar-check" style="color: var(--success-color);"></i> تم إدراج الحصص لهذا الأسبوع</p> </div> </div>
+            <img src="profile.jpg" alt="صورة المستخدم" class="profile-pic">
+        </div>
+    </header>
+    
+    <div id="finish-overlay">
+        <div class="finish-content">
+            <i class="fas fa-check-circle" style="font-size: 50px; color: var(--success-color);"></i>
+            <h2>تم حل الواجب بنجاح!</h2>
+            <p>تم إرسال إجاباتك بنجاح، يمكنك العودة إلى قائمة الواجبات الآن.</p>
+            <a href="quizzes.html" class="finish-quiz-btn" style="background-color: var(--primary-dark);">العودة لقائمة الواجبات</a>
+        </div>
+    </div>
+
+    <main class="dashboard-content">
+        
+        <a href="quizzes.html" class="back-to-home-btn">
+            <i class="fas fa-arrow-right"></i>
+            الرجوع إلى قائمة الواجبات
+        </a>
+
+        <h2 class="section-title-page">حل الواجب: الروابط الكيميائية (10 درجات)</h2>
+
+        <div class="quiz-page-container">
+            <form id="quiz-form">
+                
+                <div class="question-card">
+                    <p class="question-text">1. ما هو نوع الرابطة المتكونة بين ذرة صوديوم (Na) وذرة كلور (Cl)؟</p>
+                    <label class="option-label"><input type="radio" name="q1" value="a"> أ. رابطة تساهمية</label>
+                    <label class="option-label"><input type="radio" name="q1" value="b"> ب. رابطة أيونية</label> 
+                    <label class="option-label"><input type="radio" name="q1" value="c"> ج. رابطة فلزية</label>
+                </div>
+
+                <div class="question-card">
+                    <p class="question-text">2. أي من الكميات التالية تعتبر كمية متجهة في الفيزياء؟</p>
+                    <label class="option-label"><input type="radio" name="q2" value="a"> أ. المسافة</label>
+                    <label class="option-label"><input type="radio" name="q2" value="b"> ب. السرعة المتجهة</label> 
+                    <label class="option-label"><input type="radio" name="q2" value="c"> ج. الزمن</label>
+                </div>
+
+                <button type="button" class="finish-quiz-btn" onclick="submitQuiz()">إنهاء الواجب</button>
+            </form>
+        </div>
+        
+    </main>
+
+    <footer class="main-footer">
+        <p>تم صنع الموقع من قبل ريان محمد البارقي و سلطان سعيد ال حشاش</p>
+        <p>جميع الحقوق محفوظة لدى الحكم بن عمرو</p>
+    </footer>
+
+    <script>
+        function submitQuiz() {
+            // هنا يمكنك إضافة منطق التحقق من الإجابات وإرسالها
+            
+            // عرض رسالة الإنهاء
+            document.getElementById('finish-overlay').style.display = 'flex';
+        }
+
+        // ... (كود الجرس والقائمة الجانبية مفقود هنا، لكن يفضل نسخه) ...
+    </script>
+</body>
+</html>tml>

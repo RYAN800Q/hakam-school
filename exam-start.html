@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حل الاختبار الفصلي - فيزياء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* تنسيق خاص لصفحة الأسئلة (تم نسخه وتعديل ألوانه قليلاً ليتناسب مع الاختبارات) */
+        .exam-page-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question-card {
+            background-color: var(--primary-white);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            padding: 30px;
+            border-left: 6px solid #e74c3c; /* لون مميز للاختبارات */
+        }
+        .question-card p.question-text {
+            font-size: 19px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .option-label {
+            display: block;
+            background-color: #fcfcfc;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            font-size: 17px;
+        }
+        .option-label:hover {
+            background-color: #f0f0f0;
+            border-color: #e74c3c;
+        }
+        .option-label input[type="radio"] {
+            margin-left: 12px;
+            transform: scale(1.3);
+            cursor: pointer;
+            accent-color: #e74c3c; /* لتلوين زر الراديو */
+        }
+        .finish-exam-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 50px;
+        }
+        .finish-exam-btn:hover {
+            background-color: #1A2D40;
+        }
+
+        /* رسالة الإنهاء (Overlay) - تم استخدام تنسيق النجاح (Success) */
+        #finish-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none; /* مخفي بشكل افتراضي */
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .finish-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+        .finish-content h2 {
+            color: var(--success-color);
+            margin: 15px 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-top-header"> <i class="fas fa-grip-lines-vertical"></i> البوابة الرئيسية </div>
+        <a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a>
+        <a href="classes.html"><i class="fas fa-calendar-alt"></i> جدول الحصص</a>
+        <a href="quizzes.html"><i class="fas fa-pencil-alt"></i> الواجبات</a> 
+        <a href="results.html"><i class="fas fa-chart-line"></i> النتائج</a> 
+        <a href="exams.html"><i class="fas fa-brain"></i> الاختبارات</a> 
+        <hr style="margin: 10px 15px; border-color: #555;">
+        <a href="notes.html"><i class="far fa-comments"></i> الملاحظات</a> 
+    </div>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="school_logo.jpg" alt="شعار المدرسة" class="school-logo"> 
+            الـحـكـم بـن عـمـرو 
+        </div>
+        <div class="user-actions">
+            <div class="notification-container"> <i class="fas fa-bell" id="notification-bell"></i> <div id="notification-dropdown" class="notification-dropdown"> <h4>التنبيهات الجديدة</h4> <p><i class="fas fa-clipboard-list" style="color: var(--primary-dark);"></i> يوجد واجبات يجب حلها</p> <p><i class="fas fa-calendar-check" style="color: var(--success-color);"></i> تم إدراج الحصص لهذا الأسبوع</p> </div> </div>
+            <img src="profile.jpg" alt="صورة المستخدم" class="profile-pic">
+        </div>
+    </header>
+    
+    <div id="finish-overlay">
+        <div class="finish-content">
+            <i class="fas fa-check-circle" style="font-size: 60px; color: var(--success-color);"></i>
+            <h2>تم إنهاء الاختبار بنجاح!</h2>
+            <p>لقد أرسلت إجاباتك بنجاح. سيتم إظهار النتيجة لاحقاً في صفحة "النتائج".</p>
+            <a href="exams.html" class="finish-exam-btn" style="background-color: #e74c3c;">العودة لقائمة الاختبارات</a>
+        </div>
+    </div>
+
+    <main class="dashboard-content">
+        
+        <a href="exams.html" class="back-to-home-btn">
+            <i class="fas fa-arrow-right"></i>
+            الرجوع إلى قائمة الاختبارات
+        </a>
+
+        <h2 class="section-title-page">حل الاختبار: الاختبار الفصلي لمادة الفيزياء (50 درجة)</h2>
+
+        <div class="exam-page-container">
+            <form id="exam-form">
+                
+                <div class="question-card">
+                    <p class="question-text">1. إذا تسارعت سيارة من السكون إلى $20 \, \text{m/s}$ في $5 \, \text{ثوانٍ}$، فما هو تسارعها بوحدة $ \text{m/s}^2 $؟</p>
+                    <label class="option-label"><input type="radio" name="q1" value="a"> أ. 4</label>
+                    <label class="option-label"><input type="radio" name="q1" value="b"> ب. 10</label> 
+                    <label class="option-label"><input type="radio" name="q1" value="c"> ج. 100</label>
+                    <label class="option-label"><input type="radio" name="q1" value="d"> د. 0.25</label>
+                </div>
+
+                <div class="question-card">
+                    <p class="question-text">2. وحدة قياس القوة في النظام الدولي للوحدات (SI) هي:</p>
+                    <label class="option-label"><input type="radio" name="q2" value="a"> أ. واط (W)</label>
+                    <label class="option-label"><input type="radio" name="q2" value="b"> ب. جول (J)</label> 
+                    <label class="option-label"><input type="radio" name="q2" value="c"> ج. نيوتن (N)</label>
+                    <label class="option-label"><input type="radio" name="q2" value="d"> د. باسكال (Pa)</label>
+                </div>
+
+                <div class="question-card">
+                    <p class="question-text">3. حل المعادلة التالية لإيجاد قيمة $ x $: $ 2x + 5 = 15 $</p>
+                    <label class="option-label"><input type="radio" name="q3" value="a"> أ. $ x=5 $</label>
+                    <label class="option-label"><input type="radio" name="q3" value="b"> ب. $ x=10 $</label> 
+                    <label class="option-label"><input type="radio" name="q3" value="c"> ج. $ x=7.5 $</label>
+                    <label class="option-label"><input type="radio" name="q3" value="d"> د. $ x=20 $</label>
+                </div>
+
+                <button type="button" class="finish-exam-btn" onclick="submitExam()">إنهاء الاختبار</button>
+            </form>
+        </div>
+        
+    </main>
+
+    <footer class="main-footer">
+        <p>تم صنع الموقع من قبل ريان محمد البارقي و سلطان سعيد ال حشاش</p>
+        <p>جميع الحقوق محفوظة لدى الحكم بن عمرو</p>
+    </footer>
+
+    <script>
+        function submitExam() {
+            // هنا يمكنك إضافة منطق التحقق من الإجابات وإرسالها
+            
+            // عرض رسالة الإنهاء
+            document.getElementById('finish-overlay').style.display = 'flex';
+        }
+
+        // كود الجرس والقائمة الجانبية (لضمان عملها في كل صفحة)
+        document.addEventListener('DOMContentLoaded', () => {
+            const bellIcon = document.getElementById('notification-bell');
+            const dropdown = document.getElementById('notification-dropdown');
+
+            if (bellIcon) {
+                bellIcon.addEventListener('click', () => {
+                    bellIcon.classList.add('bell-shake');
+                    setTimeout(() => {bellIcon.classList.remove('bell-shake');}, 500); 
+                    dropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!bellIcon.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدروس - بوابة الطالب</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-top-header">
+            <i class="fas fa-grip-lines-vertical"></i>
+            البوابة الرئيسية
+        </div>
+        
+        <a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a>
+        <a href="classes.html"><i class="fas fa-calendar-alt"></i> جدول الحصص</a>
+        <a href="quizzes.html"><i class="fas fa-pencil-alt"></i> الواجبات</a> 
+        <a href="results.html"><i class="fas fa-chart-line"></i> النتائج</a> 
+        <a href="exams.html"><i class="fas fa-brain"></i> الاختبارات</a> 
+        
+        <hr style="margin: 10px 15px; border-color: #555;">
+        <a href="notes.html"><i class="far fa-comments"></i> الملاحظات</a> 
+    </div>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="school_logo.jpg" alt="شعار المدرسة" class="school-logo"> 
+            الـحـكـم بـن عـمـرو 
+        </div>
+        
+        <div class="user-actions">
+            <div class="notification-container">
+                <i class="fas fa-bell" id="notification-bell"></i> 
+                <div id="notification-dropdown" class="notification-dropdown">
+                    <h4>التنبيهات الجديدة</h4>
+                    <p><i class="fas fa-clipboard-list" style="color: var(--primary-dark);"></i> يوجد واجبات يجب حلها</p>
+                    <p><i class="fas fa-calendar-check" style="color: var(--success-color);"></i> تم إدراج الحصص لهذا الأسبوع</p>
+                </div>
+            </div>
+            <img src="profile.jpg" alt="صورة المستخدم" class="profile-pic">
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        
+        <a href="index.html" class="back-to-home-btn">
+            <i class="fas fa-arrow-right"></i>
+            الرجوع إلى الصفحة الرئيسية
+        </a>
+
+        <h2 class="section-title-page">📚 دروس هذا الأسبوع</h2>
+
+        <div class="lesson-card-wrapper">
+            <div class="lesson-details">
+                <h3>درس الدوال المثلثية</h3>
+                <p>المادة: **رياضيات 2** | المعلم: أ. خالد المحمد</p>
+            </div>
+            <div class="lesson-actions">
+                <a href="lesson-view.html?lesson=trig" class="lesson-view-btn">مشاهدة الشرح</a>
+            </div>
+        </div>
+        
+        <div class="lesson-card-wrapper" style="border-right-color: var(--success-color);">
+            <div class="lesson-details">
+                <h3>القوى في بعدين</h3>
+                <p>المادة: **فيزياء 2** | المعلم: د. فهد العتيبي</p>
+            </div>
+            <div class="lesson-actions">
+                <span class="status-tag-elegant">تمت المشاهدة</span>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="main-footer">
+        <p>تم صنع الموقع من قبل ريان محمد البارقي و سلطان سعيد ال حشاش</p>
+        <p>جميع الحقوق محفوظة لدى الحكم بن عمرو</p>
+    </footer>
+
+    <script>
+        function openNav() {if (window.innerWidth <= 900) {document.getElementById("mySidebar").style.width = "250px";}}
+        function closeNav() {if (window.innerWidth <= 900) {document.getElementById("mySidebar").style.width = "0";}}
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const bellIcon = document.getElementById('notification-bell');
+            const dropdown = document.getElementById('notification-dropdown');
+
+            if (bellIcon) {
+                bellIcon.addEventListener('click', () => {
+                    bellIcon.classList.add('bell-shake');
+                    setTimeout(() => {bellIcon.classList.remove('bell-shake');}, 500); 
+                    dropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!bellIcon.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
